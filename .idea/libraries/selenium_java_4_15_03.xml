@@ -1,0 +1,44 @@
+<component name="libraryTable">
+  <library name="selenium-java-4.15.03">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-safari-driver-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-edge-driver-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-devtools-v119-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-ie-driver-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-api-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-firefox-driver-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-api-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-chromium-driver-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-firefox-driver-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-devtools-v117-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-chrome-driver-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-os-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-devtools-v118-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-os-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-devtools-v119-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-java-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-http-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-chromium-driver-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-support-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-edge-driver-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-devtools-v85-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-support-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-json-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-remote-driver-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-http-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-devtools-v118-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-ie-driver-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-java-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-chrome-driver-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-remote-driver-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-manager-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-devtools-v85-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-devtools-v117-4.15.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-safari-driver-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-json-4.15.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0/selenium-manager-4.15.0-sources.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
