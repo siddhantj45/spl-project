@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="selenium-java-4.15.02">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/kotlin/selenium-java-4.15.0.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
