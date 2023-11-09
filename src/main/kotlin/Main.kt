@@ -5,6 +5,7 @@ import org.openqa.selenium.support.ui.WebDriverWait
 import org.openqa.selenium.By
 import java.time.Duration
 
+
 class QuoraScraper {
 
     fun createDriver(): WebDriver {
