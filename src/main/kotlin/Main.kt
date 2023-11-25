@@ -25,7 +25,6 @@ class QuoraScraper {
         )
 
         // Get the current scroll height
-        // Get the current scroll height
         var scrollHeight = (driver as JavascriptExecutor).executeScript("return document.body.scrollHeight") as Long
 
 
@@ -60,26 +59,65 @@ class QuoraScraper {
 
         // Scroll to the top of the page
         (driver as JavascriptExecutor).executeScript("window.scrollTo(0, 0);")
-
+/*
         // Loop through each div element
 
-        val divs: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, 'spacing_log_answer_content puppeteer_test_answer_content')]"))
+        val ques: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, '.puppeteer_test_question_title')]"))
+        val ans: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, 'spacing_log_answer_content puppeteer_test_answer_content')]"))
 
-
-        // Loop through each div element
-        for (div in divs) {
+        for (div in ques) {
             // Extract and concatenate text from span elements within the div
             val text = StringBuilder()
             val spans = div.findElements(By.tagName("span"))
-            for (span in spans) {
-                text.append(span.text)
-            }
+            text.append(spans[0].text)
+
+            // Question class = .puppeteer_test_question_title
+            // Print the concatenated text
+            println(text.toString())
+            println("\n\n\n")
+        }
+
+
+        // Loop through each div element
+        for (div in ans) {
+            // Extract and concatenate text from span elements within the div
+            val text = StringBuilder()
+            val spans = div.findElements(By.tagName("span"))
+            //for (span in spans) {
+            text.append(spans[0].text)
+            //}
             // Read more button class = .QTextTruncated__StyledReadMoreLink-sc-1pev100-3
             // Question class = .puppeteer_test_question_title
             // Print the concatenated text
             println(text.toString())
             println("\n\n\n")
         }
+
+        */
+
+        val questions: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, 'puppeteer_test_question_title')]"))
+        val answers: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, 'spacing_log_answer_content puppeteer_test_answer_content')]"))
+
+        val questionAndAnswerPairs = questions.zip(answers)
+
+        for ((question, answer) in questionAndAnswerPairs) {
+            // Extract and concatenate text from span elements within the question div
+            val questionText = StringBuilder()
+            val questionSpans = question.findElements(By.tagName("span"))
+            questionText.append(questionSpans[0].text)
+
+            // Extract and concatenate text from span elements within the answer div
+            val answerText = StringBuilder()
+            val answerSpans = answer.findElements(By.tagName("span"))
+            answerText.append(answerSpans[0].text)
+
+            // Print the question and answer
+            println("Question: $questionText")
+            println("Answer: $answerText")
+            println("\n\n\n")
+        }
+
+
 
 
 //        val elements = driver.findElements(By.xpath("//span[@class='q-box qu-userSelect--text']/span"))
