@@ -6,16 +6,45 @@ import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.interactions.Actions
 import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
+import java.io.*
 import java.time.Duration
+import java.util.stream.Collectors
+import java.util.stream.Stream
 
 
 class QuoraScraper {
 
+    fun escapeSpecialCharacters(data: String?): String? {
+        var data = data ?: throw IllegalArgumentException("Input data cannot be null")
+        var escapedData = data.replace("\\R".toRegex(), " ")
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"")
+            escapedData = "\"" + data + "\""
+        }
+        return escapedData
+    }
+
+    fun convertToCSV(data: Array<String>): String? {
+        return Stream.of<String>(*data)
+            .map<String>(this::escapeSpecialCharacters)
+            .collect(Collectors.joining(","))
+    }
+
+    fun createFinalCSV(dataLines: List<Array<String>>) {
+        val csvOutputFile = File("questions_answers.csv")
+        PrintWriter(csvOutputFile).use { pw ->
+            dataLines.stream()
+                .map { convertToCSV(it) } // Ensure convertToCSV has the correct signature
+                .forEach { pw.println(it) }
+        }
+    }
+
     fun createDriver(): WebDriver {
         println("Enter a Quora Username : ")
-        //val username = readLine()
-//        val username = "Marlene-Deloyer"
-        val username = "Ram-Teja-21"
+        val username = readLine()
+        //val username = "Marlene-Deloyer"
+        //val username = "Ram-Teja-21"
+        //val username = "Mark-Zuckerberg"
         val driver = ChromeDriver()
         driver.manage().window().maximize()
         driver.get("https://www.quora.com/profile/" + username + "/answers")
@@ -23,6 +52,21 @@ class QuoraScraper {
         WebDriverWait(driver, amtsecs).until(
             ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), \"Edits\")]"))
         )
+
+        //Check if the user has posted any answers
+        try {
+            WebDriverWait(driver, amtsecs).until(
+                ExpectedConditions.presenceOfElementLocated(By.ByXPath("//div[contains(@class, 'puppeteer_test_question_title')]"))
+            )
+        } catch (e: org.openqa.selenium.TimeoutException) {
+            println("The user hasn't posted any answers.")
+            return driver
+        }
+
+        // Delete the file if it already exists
+        if (File("questions_answers.csv").exists()) {
+            File("questions_answers.csv").delete()
+        }
 
         // Get the current scroll height
         var scrollHeight = (driver as JavascriptExecutor).executeScript("return document.body.scrollHeight") as Long
@@ -49,7 +93,8 @@ class QuoraScraper {
         (driver as JavascriptExecutor).executeScript("window.scrollTo(0, 0);")
 
         // Find all Read More links
-        val readMoreLinks = driver.findElements(By.xpath("//div[contains(@class, 'QTextTruncated__StyledReadMoreLink-sc-1pev100-3')][text()='(more)']"))
+        val readMoreLinks =
+            driver.findElements(By.xpath("//div[contains(@class, 'QTextTruncated__StyledReadMoreLink-sc-1pev100-3')][text()='(more)']"))
 
         // Click on each read more link
         for (readMoreLink in readMoreLinks) {
@@ -59,46 +104,18 @@ class QuoraScraper {
 
         // Scroll to the top of the page
         (driver as JavascriptExecutor).executeScript("window.scrollTo(0, 0);")
-/*
-        // Loop through each div element
-
-        val ques: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, '.puppeteer_test_question_title')]"))
-        val ans: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, 'spacing_log_answer_content puppeteer_test_answer_content')]"))
-
-        for (div in ques) {
-            // Extract and concatenate text from span elements within the div
-            val text = StringBuilder()
-            val spans = div.findElements(By.tagName("span"))
-            text.append(spans[0].text)
-
-            // Question class = .puppeteer_test_question_title
-            // Print the concatenated text
-            println(text.toString())
-            println("\n\n\n")
-        }
 
 
-        // Loop through each div element
-        for (div in ans) {
-            // Extract and concatenate text from span elements within the div
-            val text = StringBuilder()
-            val spans = div.findElements(By.tagName("span"))
-            //for (span in spans) {
-            text.append(spans[0].text)
-            //}
-            // Read more button class = .QTextTruncated__StyledReadMoreLink-sc-1pev100-3
-            // Question class = .puppeteer_test_question_title
-            // Print the concatenated text
-            println(text.toString())
-            println("\n\n\n")
-        }
-
-        */
-
-        val questions: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, 'puppeteer_test_question_title')]"))
-        val answers: List<WebElement> = driver.findElements(By.ByXPath("//div[contains(@class, 'spacing_log_answer_content puppeteer_test_answer_content')]"))
+        val questions: List<WebElement> =
+            driver.findElements(By.ByXPath("//div[contains(@class, 'puppeteer_test_question_title')]"))
+        val answers: List<WebElement> =
+            driver.findElements(By.ByXPath("//div[contains(@class, 'spacing_log_answer_content puppeteer_test_answer_content')]"))
 
         val questionAndAnswerPairs = questions.zip(answers)
+
+        val dataLines: MutableList<Array<String>> = ArrayList()
+        dataLines.add(arrayOf("Questions", "Answers"))
+
 
         for ((question, answer) in questionAndAnswerPairs) {
             // Extract and concatenate text from span elements within the question div
@@ -115,21 +132,15 @@ class QuoraScraper {
             println("Question: $questionText")
             println("Answer: $answerText")
             println("\n\n\n")
+
+            dataLines.add(arrayOf(questionText.toString(), answerText.toString()))
+
+
         }
 
+        createFinalCSV(dataLines)
 
 
-
-//        val elements = driver.findElements(By.xpath("//span[@class='q-box qu-userSelect--text']/span"))
-//
-//        for (element in elements) {
-//            val text = element.text
-//            println(text) // Replace with your desired processing or printing logic
-//        }
-
-       // val element = driver.findElement(By.xpath("//span[@class='q-box qu-userSelect--text']/span"))
-       // val txt = element.getText()
-       // println(txt)
         return driver
     }
 
@@ -138,11 +149,9 @@ class QuoraScraper {
 
 
 fun main(args: Array<String>) {
-
-    println("Hello World!")
     val scraper = QuoraScraper()
     val driver = scraper.createDriver()
-    //driver.close()
+    driver.close()
 
 
 }
